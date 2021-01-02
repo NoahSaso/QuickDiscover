@@ -1,8 +1,8 @@
-(function ($) {
+(($) => {
   const STATE_KEY = 'spotify_auth_state';
 
   // random alphanumeric string of given length
-  function generateRandomString(length) {
+  const generateRandomString = (length) => {
     let text = '';
     const possible = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
@@ -10,12 +10,10 @@
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
-  }
+  };
 
   // pads double digit number
-  function pad2D(number) {
-    return (number < 10 ? '0' : '') + number;
-  }
+  const pad2D = (number) => (number < 10 ? '0' : '') + number;
 
   const hashParams = new URLSearchParams(window.location.hash.substr(1));
 
@@ -31,23 +29,21 @@
   let trackInfo = null;
   let progressMs = null;
 
-  async function querySpotify(method, endpoint, data = null) {
-    return new Promise((resolve, reject) => {
-      const ajaxRequest = {
-        url: `https://api.spotify.com/v1${endpoint}`,
-        type: method,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        success: resolve,
-        error: reject,
-      };
-      if (data) ajaxRequest.data = JSON.stringify(data);
-      $.ajax(ajaxRequest);
-    });
-  }
+  const querySpotify = async (method, endpoint, data = null) => new Promise((resolve, reject) => {
+    const ajaxRequest = {
+      url: `https://api.spotify.com/v1${endpoint}`,
+      type: method,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      success: resolve,
+      error: reject,
+    };
+    if (data) ajaxRequest.data = JSON.stringify(data);
+    $.ajax(ajaxRequest);
+  });
 
-  function updateTrackDetails() {
+  const updateTrackDetails = () => {
     if (!trackInfo) {
       $('#album').attr('src', '');
       $('#song-progress').attr('max', 100).val(0);
@@ -64,13 +60,11 @@
     $('#song-progress').attr('max', trackInfo.duration_ms).val(progressMs);
     $('#track').html(trackName);
     $('#artist').html(artistNames.join(', '));
-  }
+  };
 
-  async function setTrackTime(time) {
-    return querySpotify('PUT', `/me/player/seek?${$.param({ position_ms: time })}`);
-  }
+  const setTrackTime = async (time) => querySpotify('PUT', `/me/player/seek?${$.param({ position_ms: time })}`);
 
-  function setIsPlaying(playing) {
+  const setIsPlaying = (playing) => {
     if (playing) {
       $('.show-if-playing').show();
       $('.show-if-paused').hide();
@@ -78,30 +72,30 @@
       $('.show-if-playing').hide();
       $('.show-if-paused').show();
     }
-  }
+  };
 
-  function updateLoader(elem, loading) {
+  const updateLoader = (elem, loading) => {
     const element = $(elem);
     if (loading) {
       element.prepend('<div class="loader"></div>');
     } else {
       element.find('.loader').remove();
     }
-  }
+  };
 
-  async function playTrack() {
+  const playTrack = async () => {
     await querySpotify('PUT', '/me/player/play');
     setIsPlaying(true);
-  }
+  };
 
-  async function pauseTrack() {
+  const pauseTrack = async () => {
     await querySpotify('PUT', '/me/player/pause');
     setIsPlaying(false);
-  }
+  };
 
   // user could switch songs/playlists manually, so this will be called
   // every time we need to access the current track info
-  async function updateTrackInfo() {
+  const updateTrackInfo = async () => {
     const response = await querySpotify('GET', '/me/player/currently-playing');
     if (!response) {
       trackInfo = null;
@@ -113,9 +107,9 @@
     trackInfo = response.item;
     progressMs = response.progress_ms;
     setIsPlaying(response.is_playing);
-  }
+  };
 
-  async function createPlaylist() {
+  const createPlaylist = async () => {
     const currentDate = new Date();
     const datetime = `${currentDate.getFullYear()}-${
       pad2D(currentDate.getMonth() + 1)}-${
@@ -131,22 +125,22 @@
     const option = $('option[value="CREATE"]');
     option.html(playlistName);
     option.attr('value', playlistId);
-  }
+  };
 
-  async function addTrackURIToPlaylist() {
+  const addTrackURIToPlaylist = async () => {
     // lazily create playlist
     if (!playlistId) await createPlaylist();
 
     await updateTrackInfo();
     return querySpotify('POST', `/users/${userId}/playlists/${playlistId}/tracks?${$.param({ uris: trackInfo.uri })}`);
-  }
+  };
 
-  async function update() {
+  const update = async () => {
     await updateTrackInfo();
     updateTrackDetails();
-  }
+  };
 
-  async function restartTrack() {
+  const restartTrack = async () => {
     await setTrackTime(Math.floor(trackInfo.duration_ms * percentage));
 
     // just in case not already playing
@@ -157,9 +151,9 @@
     }
 
     await update();
-  }
+  };
 
-  async function nextTrack() {
+  const nextTrack = async () => {
     await updateTrackInfo();
 
     // store current track
@@ -175,21 +169,19 @@
     await waitUntilNext();
     if (percentage > 0) await restartTrack();
     updateTrackDetails();
-  }
+  };
 
-  async function getPlaylists() {
-    // 50 is maximum limit (default is 20)
-    return querySpotify('GET', '/me/playlists?limit=50');
-  }
+  // 50 is maximum limit (default is 20)
+  const getPlaylists = async () => querySpotify('GET', '/me/playlists?limit=50');
 
-  function setReady() {
+  const setReady = () => {
     // update song info every 5 seconds
     setInterval(update, 5000);
     update();
-  }
+  };
 
   // auth logic
-  (async function () {
+  (async () => {
     if (accessToken && (state == null || state !== storedState)) {
       alert('There was an error during authentication');
       $('.login').show();
@@ -219,7 +211,7 @@
       $('.login').show();
       $('.loggedin').hide();
     }
-  }());
+  })();
 
   $('button#login-button').click(() => {
     const clientId = '69f480d434c5401e9762d6cd7b720ec4'; // Your client id
@@ -284,4 +276,4 @@
   $('input#start-percentage').change(async (e) => {
     percentage = e.currentTarget.value;
   });
-}(jQuery));
+})(jQuery);
