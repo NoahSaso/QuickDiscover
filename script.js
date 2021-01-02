@@ -1,4 +1,7 @@
 (($) => {
+  // REPLACE WITH YOUR CLIENT ID
+  const SPOTIFY_CLIENT_ID = 'REPLACE_ME';
+
   const STATE_KEY = 'spotify_auth_state';
 
   // random alphanumeric string of given length
@@ -214,15 +217,13 @@
   })();
 
   $('button#login-button').click(() => {
-    const clientId = '69f480d434c5401e9762d6cd7b720ec4'; // Your client id
-    const redirectUri = window.location.href; // Your redirect uri
-
+    const redirectUri = window.location.href;
     const newState = generateRandomString(16);
 
     localStorage.setItem(STATE_KEY, newState);
     const scope = 'user-modify-playback-state user-read-currently-playing playlist-modify-private playlist-read-collaborative playlist-read-private playlist-modify-public';
 
-    const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${encodeURIComponent(clientId)}&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${encodeURIComponent(newState)}`;
+    const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${encodeURIComponent(SPOTIFY_CLIENT_ID)}&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${encodeURIComponent(newState)}`;
 
     window.location = url;
   });
