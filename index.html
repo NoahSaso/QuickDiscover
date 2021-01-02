@@ -11,12 +11,12 @@
 
   <body>
     <div id="container">
-      <button id="login-button" class="login">
+      <button id="login-button" class="login" style="display:none">
         <img src="spotify.png" alt="Spotify" />
         <span>LOG IN</span>
       </button>
 
-      <div class="loggedin">
+      <div class="loggedin" style="display:none">
         <div id="song">
           <img id="album" />
           <input type="range" min="0" max="100" value="0" id="song-progress" disabled />
@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <div id="action-button" class="loggedin">
+    <div id="action-button" class="loggedin" style="display:none">
       <button id="start" type="button" class="show-if-paused" style="display:none"><i class="fas fa-play"></i></button>
       <button id="pause" type="button" class="show-if-playing" style="display:none"><i class="fas fa-pause"></i></button>
     </div>

@@ -95,11 +95,16 @@ button:hover {
 
 #song > * {
   margin-bottom: 5px;
+  text-align: center;
 }
 
 #album {
   width: 100%;
   height: 200px;
+}
+
+#track {
+  font-weight: bold;
 }
 
 #song-progress {
