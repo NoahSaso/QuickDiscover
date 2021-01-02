@@ -1,6 +1,8 @@
 QuickDiscover
 =============
 
+(Works with Spotify)
+
 With QuickDiscover, you quickly decide whether or not you want to add the currently playing track to a chosen playlist. This helps with discovering & curating music because you can play a radio of a song you like (or some other collection) and either add or skip with a single click!
 
 ## Development Setup
