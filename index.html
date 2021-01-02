@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <title>QuickDiscover</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/af64fc4f1f.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div id="container">
+      <button id="login-button" class="login">
+        <img src="spotify.png" alt="Spotify" />
+        <span>LOG IN</span>
+      </button>
+
+      <div class="loggedin">
+        <div id="song">
+          <img id="album" />
+          <input type="range" min="0" max="100" value="0" id="song-progress" disabled />
+          <span id="track">Loading...</span>
+          <span id="artist"></span>
+  
+          <div class="horizontal-buttons">
+            <button id="add" type="button" class="show-if-playing" style="display:none"><i class="fas fa-plus"></i></button>
+            <button id="skip" type="button" class="show-if-playing" style="display:none"><i class="fas fa-ban"></i></button>
+          </div>
+        </div>
+
+        <div>
+          <p class="title">Destination Playlist</p>
+          <select id="playlists">
+            <option value="CREATE" selected>Create New Playlist</option>
+          </select>
+        </div>
+
+        <div>
+          <p class="title">Like History</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Playlist</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div>
+          <p class="title">Instructions</p>
+          <p>After choosing a destination playlist, press the play button in the upper right to begin listening. Songs you like will be added to the playlist chosen above.</p>
+        </div>
+
+        <div>
+          <p class="title">Settings</p>
+          <p>Percentage of song to ignore:</p>
+          <input type="range" min="0" max="1" step="0.01" value="0" id="start-percentage" autocomplete="off" />
+          <p>This may be useful if you want to start listening at the middle of each song (in order to hear the main part of the song quicker).</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="action-button" class="loggedin">
+      <button id="start" type="button" class="show-if-paused" style="display:none"><i class="fas fa-play"></i></button>
+      <button id="pause" type="button" class="show-if-playing" style="display:none"><i class="fas fa-pause"></i></button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</html>

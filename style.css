@@ -1,0 +1,223 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-size: 1rem;
+}
+
+p {
+  margin-top: 0;
+}
+
+i {
+  color: white;
+}
+
+button {
+  width: 2.7em;
+  height: 2.7em;
+  padding: 0;
+
+  border: none;
+  background-color: transparent;
+  border-radius: 0.3em;
+
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+#container {
+  width: 98%;
+  max-width: 700px;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.loggedin > * {
+  margin-bottom: 1.5rem;
+}
+
+#login-button {
+  width: unset;
+  height: 48px;
+  margin: 0 auto;
+
+  background-color: #1db954;
+  border: none;
+  border-radius: 24px;
+  transition: background-color 0.06s ease;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#login-button > img {
+  width: 36px;
+  height: 36px;
+  margin-left: 6px;
+}
+
+#login-button > span {
+  color: white;
+  flex: 1;
+  text-align: center;
+  padding: 0 20px;
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+#song {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#song > * {
+  margin-bottom: 5px;
+}
+
+#album {
+  width: 100%;
+  height: 200px;
+}
+
+#song-progress {
+  width: 100%;
+}
+
+.horizontal-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.horizontal-buttons > * {
+  width: 48%;
+}
+
+.horizontal-buttons > *:last-child {
+  margin-right: 0;
+}
+
+#start {
+  background-color: rgb(190, 226, 231);
+}
+
+#pause {
+  background-color: rgb(238, 210, 2);
+}
+
+#add {
+  background-color: rgb(75, 181, 67);
+}
+
+#skip {
+  background-color: rgb(200, 8, 21);
+}
+
+#playlists {
+  font-size: 1em;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #333;
+  padding: 8px;
+  text-align: center;
+}
+
+tr {
+  background-color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f4ebff;
+}
+
+th {
+  background-color: #c09deb;
+}
+
+tbody > tr {
+  cursor: pointer;
+}
+
+tbody > tr:hover {
+  filter: brightness(0.96);
+}
+
+input#start-percentage {
+  width: 70%;
+  margin: 0 15%;
+}
+
+#action-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+}
+.loader {
+  margin: 0 auto;
+  font-size: 7px;
+  position: relative;
+  text-indent: -9999em;
+  border: 0.5em solid #ecf3fa;
+  border-left-color: rgba(100, 100, 100, 0.5);
+  transform: translateZ(0);
+  -webkit-animation: load8 0.9s linear infinite;
+  animation: load8 0.9s linear infinite;
+}
+@-webkit-keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.loader ~ * {
+  display: none !important;
+}
