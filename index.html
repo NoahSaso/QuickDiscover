@@ -37,6 +37,22 @@
         </div>
 
         <div>
+          <p class="title">Instructions</p>
+          <p>After choosing a destination playlist, press the play button in the upper right to begin listening. Songs you like will be added to the playlist chosen above.</p>
+        </div>
+
+        <div>
+          <p class="title">Settings</p>
+          <p><b>Percentage of song to ignore:</b></p>
+          <input type="range" min="0" max="1" step="0.01" value="0" id="start-percentage" autocomplete="off" />
+          <p>This may be useful if you want to start listening at the middle of each song (in order to hear the main part of the song quicker).</p>
+          <br>
+          <input type="checkbox" name="skip-on-add" id="skip-on-add" autocomplete="off" checked>
+          <label for="skip-on-add"><b>Skip to next track on add</b></label>
+          <p>When you like a song and add it to the playlist, the default behavior is to play the next song since you made a decision.</p>
+        </div>
+
+        <div>
           <p class="title">Like History</p>
           <table>
             <thead>
@@ -47,18 +63,6 @@
             </thead>
             <tbody></tbody>
           </table>
-        </div>
-
-        <div>
-          <p class="title">Instructions</p>
-          <p>After choosing a destination playlist, press the play button in the upper right to begin listening. Songs you like will be added to the playlist chosen above.</p>
-        </div>
-
-        <div>
-          <p class="title">Settings</p>
-          <p>Percentage of song to ignore:</p>
-          <input type="range" min="0" max="1" step="0.01" value="0" id="start-percentage" autocomplete="off" />
-          <p>This may be useful if you want to start listening at the middle of each song (in order to hear the main part of the song quicker).</p>
         </div>
       </div>
     </div>

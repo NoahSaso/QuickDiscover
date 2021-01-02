@@ -27,10 +27,13 @@
   let userId = null;
   let playlistId = null;
   let playlistName = null;
-  let percentage = 0;
 
   let trackInfo = null;
   let progressMs = null;
+
+  // Settings
+  let percentage = 0;
+  let skipOnAdd = true;
 
   const querySpotify = async (method, endpoint, data = null) => new Promise((resolve, reject) => {
     const ajaxRequest = {
@@ -240,7 +243,7 @@
     }
     $('table > tbody').append(tr);
 
-    await nextTrack();
+    if (skipOnAdd) await nextTrack();
 
     updateLoader(e.currentTarget, false);
   });
@@ -274,7 +277,11 @@
     }
   });
 
-  $('input#start-percentage').change(async (e) => {
+  $('input#start-percentage').change((e) => {
     percentage = e.currentTarget.value;
+  });
+
+  $('input#skip-on-add').change((e) => {
+    skipOnAdd = e.currentTarget.checked;
   });
 })(jQuery);
